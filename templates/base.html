@@ -25,7 +25,14 @@
         {% if user.is_authenticated %}
 
         <p>Hi {{ user.username }}!</p>
-        <p><a href="{% url 'logout' %}">Log out</a></p>
+
+        <!-- <p><a href="{% url 'logout' %}">Log out</a></p> --> <!--this causes a bug in Django 5, but was fixed in the code below-->
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+        </form>
+
 
         {% else %}
 
